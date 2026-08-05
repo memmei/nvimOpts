@@ -66,6 +66,16 @@ end
 vim.api.nvim_create_user_command("TrimWhitespace", trim_whitespace, {})
 vim.keymap.set("n", "<leader>tw", trim_whitespace, { desc = "Trim trailing spaces" })
 
+-- --- 自動コマンド---
+-- Markdownファイル用のHTMLコメントハイライト設定
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.cmd.syntax('region htmlComment start="<!--" end="-->"')
+		vim.cmd.hi("link htmlComment Comment")
+	end,
+})
+
 -- --- プラグイン管理 (lazy.nvim) ---
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
