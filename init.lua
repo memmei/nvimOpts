@@ -6,7 +6,6 @@ vim.api.nvim_set_current_dir("E:/forge")
 -- --- グローバル変数設定 ---
 vim.g.mapleader = " " -- <leader> キーをスペースに設定
 vim.g.termfeatures = { osc52 = false }
-vim.g.neovide_input_ime = true -- imeのリアルタイム表示
 
 -- --- 基本設定 ---
 vim.opt.number = true -- 行番号を表示
