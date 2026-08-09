@@ -44,6 +44,9 @@ vim.keymap.set({ "i", "v" }, "fj", "<Esc>", { silent = true, noremap = true })
 -- 検索ハイライトを一時的に消す
 vim.keymap.set("n", "<leader>nh", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
+-- 今いるファイルのディレクトリにカレントディレクトリを移動
+vim.keymap.set('n', '<leader>cd', '<cmd>lcd %:p:h<CR>', { desc = 'Change working directory to current file' })
+
 -- スペルチェックの切り替え
 vim.keymap.set("n", "<leader>sc", function()
 	vim.wo.spell = not vim.wo.spell
