@@ -40,7 +40,7 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "marksman", "bashls" },
+				ensure_installed = { "lua_ls", "marksman", "bashls", "ts_ls" },
 			})
 
 			vim.lsp.config("lua_ls", {
@@ -166,7 +166,17 @@ return {
 		build = ":TSUpdate",
 		main = "nvim-treesitter",
 		opts = {
-			ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "vim", "vimdoc" },
+			ensure_installed = {
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"bash",
+				"vim",
+				"vimdoc",
+				"javascript",
+				"typescript",
+				"tsx",
+			},
 		},
 	},
 
