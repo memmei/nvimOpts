@@ -32,6 +32,7 @@ return {
 					"lua_ls",
 					"marksman",
 					"bashls",
+					"ts_ls",
 					-- フォーマッタ
 					"stylua",
 					"prettier",
@@ -59,7 +60,20 @@ return {
 				filetypes = { "sh", "bash" },
 			})
 
-			vim.lsp.enable({ "lua_ls", "marksman", "bashls" })
+			vim.lsp.config("ts_ls", {
+				cmd = { "typescript-language-server", "--stdio" },
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				root_markers = { "tsconfig.json", "package.json", ".git" },
+			})
+
+			vim.lsp.enable({ "lua_ls", "marksman", "bashls", "ts_ls" })
 
 			-- --- LSPのキーマップ設定 ---
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -138,6 +152,10 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				markdown = { "prettier" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
 			},
 		},
 	},
