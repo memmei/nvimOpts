@@ -216,15 +216,11 @@ return {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
-				completion = {
-					autocomplete = false,
-				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-n>"] = cmp.mapping.select_next_item(),
-					["<C-p>"] = cmp.mapping.select_prev_item(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-e>"] = cmp.mapping.abort(),
+					["<C-n>"] = cmp.mapping.select_next_item(), -- 次の候補
+					["<C-p>"] = cmp.mapping.select_prev_item(), -- 前の候補
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- 確定
+					["<C-e>"] = cmp.mapping.abort(), -- 補完ウィンドウを閉じる
 				}),
 				sources = {
 					{ name = "nvim_lsp" },
