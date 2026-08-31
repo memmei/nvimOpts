@@ -32,6 +32,7 @@ return {
 					"lua_ls",
 					"marksman",
 					"bashls",
+					"ts_ls",
 					-- フォーマッタ
 					"stylua",
 					"prettier",
@@ -39,7 +40,7 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "marksman", "bashls" },
+				ensure_installed = { "lua_ls", "marksman", "bashls", "ts_ls" },
 			})
 
 			vim.lsp.config("lua_ls", {
@@ -59,7 +60,20 @@ return {
 				filetypes = { "sh", "bash" },
 			})
 
-			vim.lsp.enable({ "lua_ls", "marksman", "bashls" })
+			vim.lsp.config("ts_ls", {
+				cmd = { "typescript-language-server", "--stdio" },
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				root_markers = { "tsconfig.json", "package.json", ".git" },
+			})
+
+			vim.lsp.enable({ "lua_ls", "marksman", "bashls", "ts_ls" })
 
 			-- --- LSPのキーマップ設定 ---
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -138,6 +152,10 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				markdown = { "prettier" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
 			},
 		},
 	},
@@ -148,7 +166,17 @@ return {
 		build = ":TSUpdate",
 		main = "nvim-treesitter",
 		opts = {
-			ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "vim", "vimdoc" },
+			ensure_installed = {
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"bash",
+				"vim",
+				"vimdoc",
+				"javascript",
+				"typescript",
+				"tsx",
+			},
 		},
 	},
 
@@ -188,15 +216,11 @@ return {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
-				completion = {
-					autocomplete = false,
-				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-n>"] = cmp.mapping.select_next_item(),
-					["<C-p>"] = cmp.mapping.select_prev_item(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-e>"] = cmp.mapping.abort(),
+					["<C-n>"] = cmp.mapping.select_next_item(), -- 次の候補
+					["<C-p>"] = cmp.mapping.select_prev_item(), -- 前の候補
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- 確定
+					["<C-e>"] = cmp.mapping.abort(), -- 補完ウィンドウを閉じる
 				}),
 				sources = {
 					{ name = "nvim_lsp" },

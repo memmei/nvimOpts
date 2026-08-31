@@ -6,7 +6,16 @@ winget install neovide.neovide
 winget install -e --id BurntSushi.ripgrep.MSVC
 # treesitter: syntax analysis
 winget install -e --id tree-sitter.tree-sitter-cli
+```
 
+# init on mac
+```sh
+brew install neovim
+brew install --cask neovide
+# livegrep: smart grep
+brew install ripgrep
+# treesitter: syntax analysis
+brew install tree-sitter
 ```
 
 # init.lua limitations
