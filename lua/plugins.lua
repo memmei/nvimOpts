@@ -99,20 +99,18 @@ return {
 		},
 	},
 
-	-- ファイル操作ファイラ (oil.nvim)
+	-- ファイル操作ファイラ (neo-tree.nvim)
 	{
-		"stevearc/oil.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			default_file_explorer = true,
-			view_options = { show_hidden = true },
-			keymaps = {
-				["<C-t>"] = false, -- 「新規タブで開く」を無効化する
-			},
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
 		},
-		keys = {
-			{ "<leader>o", "<cmd>Oil<cr>", desc = "Open parent directory" },
-		},
+		config = function()
+			vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { silent = true })
+		end,
 	},
 
 	-- ターミナル (ToggleTerm)
